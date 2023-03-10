@@ -139,8 +139,8 @@ def start_date(start):
     start_date = []
 
     for result in results4:
-        # if start == dt.datetime("%Y-%m-%d"):
-        if start == "2017-06-15":
+        if start == dt.datetime("%Y-%m-%d"):
+        # if start == "2017-06-15":
             start_date_dict = {}
             start_date_dict["min"] = func.min(Measurement.tobs)
             start_date_dict["avg"] = func.avg(Measurement.tobs)
