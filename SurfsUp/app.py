@@ -100,6 +100,7 @@ def tobs():
     results3 = session.query(Measurement.station, Measurement.date, Measurement.tobs).\
                         filter(Measurement.station == 'USC00519281').\
                         filter(Measurement.date >= "2016-08-18").all()
+    
 
     session.close()
 
@@ -123,6 +124,11 @@ def start_date(start):
     # Create our session (link) from Python to the DB
     session = Session(engine)
 
+
+    # define date format to be passed on the search
+
+    start == dt.datetime.strptime(start, "%Y-%m-%d")
+
     # Query results from measurements table
 
     sel = [func.min(Measurement.tobs),\
@@ -135,28 +141,47 @@ def start_date(start):
     session.close()
 
     # Convert list of tuples into normal list
-    
-    start_date = []
 
-    for result in results4:
-        if start == dt.datetime("%Y-%m-%d"):
-        # if start == "2017-06-15":
-            start_date_dict = {}
-            start_date_dict["min"] = func.min(Measurement.tobs)
-            start_date_dict["avg"] = func.avg(Measurement.tobs)
-            start_date_dict["max"] = func.max(Measurement.tobs)
-            start_date.append(result)
+    temps = list(np.ravel(results4))
 
-        return jsonify(results4)
+    return jsonify(temps)
 
-    return jsonify({"error": "Character not found."}), 404
+
+
+
+
+@app.route("/api/v1.0/<start>/<end>")
+def start_end_date(start, end):
+# def end_date(end):
+
+    # Create our session (link) from Python to the DB
+    session = Session(engine)
+
+    # define date format to be passed on the search
+    start == dt.datetime.strptime(start, "%Y-%m-%d")
+    end == dt.datetime.strptime(end, "%Y-%m-%d")
+
+    # Query results from measurements table
+
+    sel = [func.min(Measurement.tobs),\
+            func.avg(Measurement.tobs),\
+                func.max(Measurement.tobs)]
+
+    results5 = session.query(*sel).filter(Measurement.date >= start).filter(Measurement.date <= end).all()
+
+
+    session.close()
+
+    # Convert list of tuples into normal list
+
+    temps2 = list(np.ravel(results5))
+
+    return jsonify(temps2)
 
 
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-
 
 
 

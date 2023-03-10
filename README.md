@@ -1,16 +1,18 @@
 # sqlalchemy-challenge
 
-# Challenge solved by Gustavo Pires
+## Challenge solved by Gustavo Pires
 
-# Part 1: Analyze and Explore the Climate Data
+## Part 1: Analyze and Explore the Climate Data
 
-# Please refer to the "climate_solved_GP.ipynb" file
+## Please refer to the "climate_solved_GP.ipynb" file
 
-# Part 2: Design Your Climate App
+## Part 2: Design Your Climate App
 
-# Please refer to the "app.py" file
+## Please refer to the "app.py" file
 
-# Unfortunately I could not solve the API Dynamic Routes as required. I would appreciate receiving some guidance on this. 
+## Datetime format to be passed on dynamic routes (yyyy-mm-dd). 
+
+## Exemples: http://127.0.0.1:5000/api/v1.0/2012-01-15 , http://127.0.0.1:5000/api/v1.0/2012-01-15/2012-01-31
 
 
 
